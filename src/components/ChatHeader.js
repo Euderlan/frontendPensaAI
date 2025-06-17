@@ -13,10 +13,6 @@ const ChatHeader = ({ onToggleSidebar, sidebarVisible, onNewChat }) => {
         </button>
         <div className="chat-info">
           <div className="chat-title">🤖 Pensa.AI</div>
-          <div className="online-status">
-            <div className="status-dot"></div>
-            <span>Assistente Educacional Online</span>
-          </div>
         </div>
       </div>
       
