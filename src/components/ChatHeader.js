@@ -1,4 +1,9 @@
+
+// ==========================================
+// src/components/ChatHeader.js
+// ==========================================
 import React from 'react';
+import '../styles/ChatHeader.css';
 
 const ChatHeader = ({ onToggleSidebar, sidebarVisible, onNewChat }) => {
   return (

@@ -1,4 +1,8 @@
+// ==========================================
+// src/components/SidebarComponents.js
+// ==========================================
 import React from 'react';
+import '../styles/SidebarComponents.css';
 
 // Componente Item do Histórico
 export const HistoryItem = ({ chat, isActive, onClick }) => {

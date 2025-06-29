@@ -1,4 +1,8 @@
+// ==========================================
+// src/components/MessageComponents.js
+// ==========================================
 import React from 'react';
+import '../styles/MessageComponents.css';
 
 // Componente de Mensagem Individual
 export const Message = ({ message }) => {

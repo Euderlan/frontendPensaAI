@@ -1,4 +1,8 @@
+// ==========================================
+// src/components/MessageInput.js
+// ==========================================
 import React from 'react';
+import '../styles/MessageInput.css';
 
 const MessageInput = ({ 
   inputValue, 
