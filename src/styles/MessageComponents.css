@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  padding: 10px 200px;
   /* Scrollbar oculta */
   -ms-overflow-style: none; /* IE */
   scrollbar-width: none; /* Firefox */
@@ -49,24 +50,17 @@
   max-width: 70%;
   padding: 16px 20px;
   border-radius: 20px;
-  box-shadow: 0 3px 15px rgba(220, 216, 216, 0.1);
+  
   line-height: 1.5;
   word-wrap: break-word;
   position: relative;
 }
 
 .message.user .message-content {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #343434;
   color: white;
   border-radius: 20px 20px 5px 20px;
-  box-shadow: 0 3px 15px rgba(102, 126, 234, 0.3);
-}
-
-.message.ai .message-content {
-  background: white;
-  color: #2d3748;
-  border-radius: 20px 20px 20px 5px;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+  
 }
 
 /* ==========================================
@@ -84,7 +78,6 @@
   border-radius: 20px 20px 20px 5px;
   border-left: 4px solid #4facfe;
   max-width: 220px;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
   animation: fadeInTyping 0.3s ease-in;
 }
 
@@ -126,7 +119,7 @@
    RESPONSIVIDADE - MENSAGENS
    ========================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 968px) {
   .messages-area {
     padding: 15px;
     gap: 12px;
@@ -162,11 +155,11 @@
 
 @media (prefers-color-scheme: dark) {
   .messages-area {
-    background: linear-gradient(180deg, #2d3748 0%, #1a202c 100%);
+    background: transparent;
   }
   
   .message.ai .message-content {
-    background: #4a5568;
+    background: transparent;
     color: #e2e8f0;
   }
 }
@@ -208,6 +201,6 @@
   
   .message.user .message-content {
     background: #000;
-    color: #fff;
+    
   }
 }

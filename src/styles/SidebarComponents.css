@@ -3,22 +3,23 @@
    ========================================== */
 
 .sidebar {
-  width: 200px;
+  width: 280px;
   background: #2c3e50;
   color: white;
-  border-radius: 15px;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
   position: relative;
   z-index: 10;
+  height: 100vh;
 }
 
 .sidebar.hidden {
-  transform: translateX(-200%);
-  margin-right: -200px;
+  transform: translateX(-100%);
+  width: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .sidebar.visible {
@@ -83,7 +84,7 @@
 }
 
 .history-list::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #34495e;
   border-radius: 4px;
 }
 
@@ -143,9 +144,9 @@
 }
 
 .clear-history {
-  background: #e74c3c;
+  background: transparent;
   color: white;
-  border: none;
+  border: 2px;
   border-radius: 8px;
   padding: 12px 16px;
   cursor: pointer;
@@ -153,7 +154,7 @@
   transition: all 0.3s ease;
   font-size: 14px;
   font-weight: 500;
-  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
 }
 
 .clear-history:hover {
@@ -175,18 +176,19 @@
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
-    top: 10px;
-    left: 10px;
-    bottom: 10px;
+    top: 0;
+    left: 0;
+    bottom: 0;
     width: 280px;
     z-index: 20;
-    border-radius: 10px;
+    border-radius: 0;
     padding: 15px;
   }
 
   .sidebar.hidden {
     transform: translateX(-100%);
-    margin-right: 0;
+    width: 280px;
+    padding: 15px;
   }
 
   .sidebar-header {
@@ -240,9 +242,11 @@
   .sidebar {
     width: 250px;
     padding: 12px;
-    top: 5px;
-    left: 5px;
-    bottom: 5px;
+  }
+
+  .sidebar.hidden {
+    width: 250px;
+    padding: 12px;
   }
 
   .sidebar-title {
