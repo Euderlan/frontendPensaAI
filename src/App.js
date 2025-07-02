@@ -80,6 +80,17 @@ const App = () => {
     await sendMessage(message);
   };
 
+  // Manipula seleção de arquivo
+  const handleFileSelect = (file) => {
+    console.log('Arquivo selecionado:', file);
+    // Aqui você pode implementar a lógica para processar o arquivo
+    // Por exemplo, fazer upload para um servidor ou processar localmente
+    
+    // Adiciona uma mensagem indicando que um arquivo foi anexado
+    const fileMessage = `📎 Arquivo anexado: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+    sendMessage(fileMessage);
+  };
+
   // Nova conversa
   const handleNewChat = () => {
     newChat();
@@ -120,6 +131,7 @@ const App = () => {
             inputValue={inputValue}
             setInputValue={setInputValue}
             onSendMessage={handleSendMessage}
+            onFileSelect={handleFileSelect}
             isTyping={isTyping}
             inputRef={inputRef}
           />

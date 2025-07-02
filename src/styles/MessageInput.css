@@ -5,195 +5,288 @@
 .input-wrapper {
   position: sticky;
   bottom: 0;
-  background: white;
+  background: transparent;
   z-index: 5;
+  padding: 20px;
 }
 
 .input-area {
-  background: white;
-  padding: 20px 200px;
-  border-radius: 25px;
-  border-width: 2px;
-  
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  border-width: 0;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .input-container {
   display: flex;
-  padding: 0px 80px;
-  gap: 12px;
   align-items: flex-end;
-  max-width: 100%;
-}
-
-.message-input {
-  flex: 1;
-  border: 2px solid #e2e8f0;
+  gap: 8px;
+  background: #f8f9fa;
+  border: 1px solid #e2e8f0;
   border-radius: 25px;
-  padding: 14px 20px;
-  font-size: 16px;
-  font-family: inherit;
-  resize: none;
-  min-height: 52px;
-  max-height: 120px;
+  padding: 8px 12px;
   transition: all 0.3s ease;
-  background: #f7fafc;
-  outline: none;
-  line-height: 1.5;
+  position: relative;
 }
 
-.message-input::placeholder {
-  color: #a0aed0;
-  font-style: italic;
+.input-container:focus-within {
+  border-color: #4facfe;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+  background: white;
 }
 
-
-
-.message-input:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  background: #edf2f7;
-}
-
-.send-button {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+/* Botão de adicionar arquivo (+) */
+.add-file-button {
+  background: transparent;
   border: none;
-  border-radius: 50%;
-  width: 52px;
-  height: 52px;
-  color: white;
+  color: #64748b;
   cursor: pointer;
-  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+  font-weight: bold;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.add-file-button:hover {
+  background: rgba(100, 116, 139, 0.1);
+  color: #4facfe;
+  transform: scale(1.05);
+}
+
+.add-file-button:focus {
+  outline: 2px solid #4facfe;
+  outline-offset: 2px;
+}
+
+/* Input de mensagem */
+.message-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 8px 12px;
+  font-size: 16px;
+  font-family: inherit;
+  resize: none;
+  min-height: 24px;
+  max-height: 120px;
+  line-height: 1.5;
+  outline: none;
+  color: #1e293b;
+}
+
+.message-input::placeholder {
+  color: #94a3b8;
+  font-style: normal;
+}
+
+.message-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Botão de enviar */
+.send-button {
+  background: #343434;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
   position: relative;
   overflow: hidden;
 }
 
-.send-button::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  transform: translate(-50%, -50%);
-}
-
 .send-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
-}
-
-.send-button:hover:not(:disabled)::before {
-  width: 100%;
-  height: 100%;
+  background: #1e293b;
+  transform: scale(1.05);
 }
 
 .send-button:active:not(:disabled) {
-  transform: translateY(0);
-  box-shadow: 0 2px 10px rgba(79, 172, 254, 0.3);
+  transform: scale(0.95);
 }
 
 .send-button:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
   transform: none;
-  background: #cbd5e0;
-  box-shadow: none;
+  background: #94a3b8;
 }
 
 .send-button:focus {
   outline: 2px solid #4facfe;
   outline-offset: 2px;
-  border-radius: 4px;
+}
+
+/* Input de arquivo oculto */
+.file-input {
+  display: none;
+}
+
+/* Indicador de arquivo selecionado */
+.file-indicator {
+  position: absolute;
+  bottom: 100%;
+  left: 12px;
+  background: #4facfe;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  animation: slideUp 0.3s ease;
+}
+
+.file-indicator .remove-file {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.file-indicator .remove-file:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* ==========================================
-   RESPONSIVIDADE - INPUT
+   RESPONSIVIDADE - INPUT ATUALIZADO
    ========================================== */
 
-@media (max-width: 968px) {
-  .input-area {
+@media (max-width: 768px) {
+  .input-wrapper {
     padding: 15px;
   }
 
+  .input-area {
+    max-width: none;
+  }
+
   .input-container {
-    gap: 10px;
-    padding: 0;
+    padding: 6px 10px;
+    gap: 6px;
   }
 
   .message-input {
-    padding: 12px 16px;
+    padding: 6px 10px;
     font-size: 16px; /* Evita zoom no iOS */
   }
 
-  .send-button {
-    width: 48px;
-    height: 48px;
-    font-size: 16px;
+  .send-button,
+  .add-file-button {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .file-indicator {
+    font-size: 11px;
+    padding: 3px 6px;
   }
 }
 
 @media (max-width: 480px) {
-  .input-area {
+  .input-wrapper {
     padding: 12px;
   }
 
   .input-container {
-    gap: 8px;
+    padding: 4px 8px;
+    gap: 4px;
   }
 
   .message-input {
-    padding: 10px 14px;
-    min-height: 44px;
-    border-radius: 22px;
+    padding: 4px 8px;
+    min-height: 20px;
   }
 
-  .send-button {
-    width: 44px;
-    height: 44px;
-    font-size: 14px;
+  .send-button,
+  .add-file-button {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
   }
 }
 
 /* ==========================================
-   MODO ESCURO - INPUT
+   MODO ESCURO - INPUT ATUALIZADO
    ========================================== */
 
 @media (prefers-color-scheme: dark) {
   .input-wrapper {
-    background: #2d3748;
+    background: transparent;
   }
 
-  .input-area {
-    background: #2d3748;
-    border-top-color: #4a5568;
+  .input-container {
+    background: #334155;
+    border-color: #475569;
+  }
+
+  .input-container:focus-within {
+    background: #1e293b;
+    border-color: #4facfe;
   }
 
   .message-input {
-    background: #4a5568;
     color: #e2e8f0;
-    border-color: #718096;
   }
   
   .message-input::placeholder {
-    color: #a0aec0;
+    color: #94a3b8;
   }
 
-  .message-input:focus {
-    background: #2d3748;
-    border-color: #4facfe;
+  .add-file-button {
+    color: #94a3b8;
+  }
+
+  .add-file-button:hover {
+    background: rgba(148, 163, 184, 0.1);
+    color: #4facfe;
   }
 }
 
 /* ==========================================
-   IMPRESSÃO - INPUT
+   ANIMAÇÕES
+   ========================================== */
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   IMPRESSÃO - INPUT ATUALIZADO
    ========================================== */
 
 @media print {
