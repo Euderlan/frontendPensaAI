@@ -39,6 +39,19 @@ export const SidebarToggle = ({ isVisible, onToggle }) => {
   );
 };
 
+// Componente Overlay para Mobile
+export const SidebarOverlay = ({ isVisible, onClose }) => {
+  if (!isVisible) return null;
+  
+  return (
+    <div 
+      className="sidebar-overlay visible" 
+      onClick={onClose}
+      aria-label="Fechar menu"
+    />
+  );
+};
+
 // Componente Sidebar do Histórico
 export const Sidebar = ({ 
   chatHistory, 
@@ -46,40 +59,49 @@ export const Sidebar = ({
   onLoadChat, 
   onClearHistory, 
   onNewChat,
-  isVisible 
+  isVisible,
+  onToggleSidebar // Nova prop para fechar o sidebar
 }) => {
   return (
-    <div className={`sidebar ${isVisible ? 'visible' : 'hidden'}`}>
-      <div className="sidebar-header">
-        <div className="sidebar-header-content">
-          <span>💬</span>
-          <span className="sidebar-title">Histórico</span>
+    <>
+      <div className={`sidebar ${isVisible ? 'visible' : 'hidden'}`}>
+        <div className="sidebar-header">
+          <div className="sidebar-header-content">
+            <span>💬</span>
+            <span className="sidebar-title">Histórico</span>
+          </div>
+          <button className="new-chat-btn" onClick={onNewChat} title="Nova conversa">
+            ✨ Nova
+          </button>
         </div>
-        <button className="new-chat-btn" onClick={onNewChat} title="Nova conversa">
-          ✨ Nova
+        
+        <div className="history-list">
+          {chatHistory.length === 0 ? (
+            <div className="no-history">
+              Nenhuma conversa ainda
+            </div>
+          ) : (
+            chatHistory.map(chat => (
+              <HistoryItem
+                key={chat.id}
+                chat={chat}
+                isActive={chat.id === currentChatId}
+                onClick={() => onLoadChat(chat)}
+              />
+            ))
+          )}
+        </div>
+        
+        <button className="clear-history" onClick={onClearHistory}>
+          🗑️ Limpar Histórico
         </button>
       </div>
       
-      <div className="history-list">
-        {chatHistory.length === 0 ? (
-          <div className="no-history">
-            Nenhuma conversa ainda
-          </div>
-        ) : (
-          chatHistory.map(chat => (
-            <HistoryItem
-              key={chat.id}
-              chat={chat}
-              isActive={chat.id === currentChatId}
-              onClick={() => onLoadChat(chat)}
-            />
-          ))
-        )}
-      </div>
-      
-      <button className="clear-history" onClick={onClearHistory}>
-        🗑️ Limpar Histórico
-      </button>
-    </div>
+      {/* Overlay para fechar sidebar em mobile */}
+      <SidebarOverlay 
+        isVisible={isVisible} 
+        onClose={onToggleSidebar} 
+      />
+    </>
   );
 };

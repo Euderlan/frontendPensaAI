@@ -39,6 +39,8 @@ const App = () => {
     const handleResize = () => {
       if (window.innerWidth <= 768) {
         setSidebarVisible(false);
+      } else {
+        setSidebarVisible(true);
       }
     };
     
@@ -94,6 +96,10 @@ const App = () => {
   // Nova conversa
   const handleNewChat = () => {
     newChat();
+    // Em mobile, fecha o sidebar após criar nova conversa
+    if (window.innerWidth <= 768) {
+      setSidebarVisible(false);
+    }
     // Focus no input após nova conversa
     setTimeout(() => {
       if (inputRef.current) {
@@ -102,14 +108,24 @@ const App = () => {
     }, 100);
   };
 
+  // Carrega chat e fecha sidebar em mobile
+  const handleLoadChat = (chatData) => {
+    loadChat(chatData);
+    // Em mobile, fecha o sidebar após carregar chat
+    if (window.innerWidth <= 768) {
+      setSidebarVisible(false);
+    }
+  };
+
   return (
     <div className="app-container">
       <Sidebar
         chatHistory={chatHistory}
         currentChatId={currentChatId}
-        onLoadChat={loadChat}
+        onLoadChat={handleLoadChat}
         onClearHistory={clearAllHistory}
         onNewChat={handleNewChat}
+        onToggleSidebar={toggleSidebar} // Nova prop para fechar sidebar
         isVisible={sidebarVisible}
       />
       
