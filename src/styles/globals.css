@@ -20,6 +20,9 @@ body {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #333;
   line-height: 1.6;
+  /* CORREÇÃO: Remove qualquer margin/padding que possa interferir */
+  margin: 0;
+  padding: 0;
 }
 
 #root {
@@ -27,10 +30,13 @@ body {
   width: 100vw;
   display: flex;
   overflow: hidden;
+  /* CORREÇÃO: Garante que não há espaços extras */
+  margin: 0;
+  padding: 0;
 }
 
 /* ==========================================
-   LAYOUT PRINCIPAL
+   LAYOUT PRINCIPAL - CORRIGIDO
    ========================================== */
 
 .app-container {
@@ -40,13 +46,150 @@ body {
   gap: 0;
   position: relative;
   overflow: hidden;
+  /* CORREÇÃO: Garante altura fixa */
+  min-height: 100vh;
+  max-height: 100vh;
+}
+
+/* ==========================================
+   CHAT CONTAINER - VERSÃO CORRIGIDA
+   ========================================== */
+
+.chat-container {
+  flex: 1;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+  height: 100vh;
+  /* CORREÇÃO: Força altura específica */
+  min-height: 100vh;
+  max-height: 100vh;
+}
+
+.chat-container.expanded {
+  max-width: none;
+}
+
+/* ==========================================
+   RESPONSIVIDADE MOBILE - CORRIGIDA
+   ========================================== */
+
+@media (max-width: 768px) {
+  html, body {
+    height: 100%;
+    /* CORREÇÃO: Remove qualquer overflow que cause problemas */
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+
+  #root {
+    height: 100vh;
+    width: 100vw;
+    /* CORREÇÃO: Garante que ocupe toda a tela */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .app-container {
+    height: 100vh;
+    /* CORREÇÃO: Remove gaps que podem causar problemas */
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    /* CORREÇÃO: Fixa a altura */
+    min-height: 100vh;
+    max-height: 100vh;
+    position: relative;
+  }
+
+  .chat-container {
+    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    /* CORREÇÃO: Garante que o flex funcione corretamente */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .chat-container.expanded {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  html, body {
+    /* CORREÇÃO: Força altura específica em telas pequenas */
+    height: 100vh;
+    min-height: 100vh;
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .chat-container {
+    min-height: 100vh;
+    max-height: 100vh;
+    /* CORREÇÃO: Remove qualquer espaçamento extra */
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* ==========================================
+   CORREÇÕES ESPECÍFICAS PARA O HEADER
+   ========================================== */
+
+/* Garante que o header não seja empurrado para cima */
+.chat-header {
+  /* CORREÇÃO: Remove flex-shrink que pode causar problemas */
+  flex-shrink: 0;
+  /* CORREÇÃO: Altura mínima garantida */
+  min-height: 80px;
+  /* CORREÇÃO: Posição relativa para garantir que fique no lugar */
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+/* ==========================================
+   CORREÇÕES PARA A ÁREA DE MENSAGENS
+   ========================================== */
+
+.messages-area {
+  /* CORREÇÃO: Permite que a área de mensagens cresça mas não empurre o header */
+  flex: 1;
+  overflow-y: auto;
+  /* CORREÇÃO: Garante altura mínima */
+  min-height: 0;
+}
+
+/* ==========================================
+   CORREÇÕES PARA O INPUT
+   ========================================== */
+
+.input-wrapper {
+  /* CORREÇÃO: Remove flex-shrink para manter o input no lugar */
+  flex-shrink: 0;
+  /* CORREÇÃO: Garante que fique na parte inferior */
+  position: relative;
+  z-index: 5;
 }
 
 /* ==========================================
    SCROLLBAR PERSONALIZADA
    ========================================== */
 
-/* Scrollbar padrão para todos os componentes */
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: #4facfe #f1f5f9;
@@ -129,28 +272,9 @@ body {
 }
 
 /* ==========================================
-   RESPONSIVIDADE GLOBAL
-   ========================================== */
-
-@media (max-width: 768px) {
-  .app-container {
-    flex-direction: row;
-    height: 100vh;
-    gap: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .app-container {
-    gap: 0;
-  }
-}
-
-/* ==========================================
    ACESSIBILIDADE
    ========================================== */
 
-/* Reduz animações para usuários que preferem menos movimento */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -159,14 +283,12 @@ body {
   }
 }
 
-/* Focus visível para navegação por teclado */
 .focus-visible {
   outline: 2px solid #4facfe;
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* Alto contraste para melhor legibilidade */
 @media (prefers-contrast: high) {
   .status-dot {
     background: #00ff00;
@@ -174,10 +296,14 @@ body {
   }
 }
 
-/* Modo escuro (se implementado futuramente) */
 @media (prefers-color-scheme: dark) {
   body {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  }
+
+  .chat-container {
+    background: #2d3748;
+    color: #e2e8f0;
   }
 }
 

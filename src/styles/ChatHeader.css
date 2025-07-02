@@ -3,28 +3,19 @@
    ========================================== */
 
 .chat-header {
-  /* CORREÇÃO: Background sólido ao invés de transparente */
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(transparent);
   padding: 20px 25px;
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 80px;
-  /* ADICIONADO: Garante que ficará no topo */
-  position: relative;
-  z-index: 5;
-  /* ADICIONADO: Previne quebras em mobile */
-  flex-shrink: 0;
 }
 
 .chat-header-left {
   display: flex;
   align-items: center;
   gap: 15px;
-  /* ADICIONADO: Permite overflow em textos longos */
-  min-width: 0;
-  flex: 1;
 }
 
 .sidebar-toggle-btn {
@@ -37,11 +28,6 @@
   transition: all 0.3s ease;
   font-size: 16px;
   backdrop-filter: blur(10px);
-  /* ADICIONADO: Garante tamanho mínimo */
-  min-width: 44px;
-  min-height: 44px;
-  /* ADICIONADO: Não reduz em telas pequenas */
-  flex-shrink: 0;
 }
 
 .sidebar-toggle-btn:hover {
@@ -58,19 +44,12 @@
 .chat-info {
   display: flex;
   flex-direction: column;
-  /* ADICIONADO: Permite overflow */
-  min-width: 0;
-  flex: 1;
 }
 
 .chat-title {
   font-size: 1.6em;
   font-weight: 700;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  /* ADICIONADO: Previne overflow em mobile */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .online-status {
@@ -102,14 +81,6 @@
   font-size: 14px;
   font-weight: 500;
   backdrop-filter: blur(10px);
-  /* ADICIONADO: Garante tamanho mínimo */
-  min-height: 44px;
-  /* ADICIONADO: Não reduz em telas pequenas */
-  flex-shrink: 0;
-  /* ADICIONADO: Centraliza conteúdo */
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .new-chat-header-btn:hover {
@@ -135,23 +106,13 @@
 }
 
 /* ==========================================
-   RESPONSIVIDADE - CHAT HEADER CORRIGIDA
+   RESPONSIVIDADE - CHAT HEADER
    ========================================== */
 
 @media (max-width: 768px) {
   .chat-header {
-    /* CORREÇÃO: Mantém background visível em mobile */
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 15px 20px;
     min-height: 70px;
-    /* ADICIONADO: Garante que não quebra */
-    flex-wrap: nowrap;
-  }
-
-  .chat-header-left {
-    gap: 12px;
-    /* ADICIONADO: Permite overflow controlado */
-    min-width: 0;
   }
 
   .chat-title {
@@ -165,148 +126,52 @@
   .new-chat-header-btn {
     padding: 8px 12px;
     font-size: 12px;
-    /* ADICIONADO: Garante que texto não quebra */
-    white-space: nowrap;
   }
 
   .sidebar-toggle-btn {
     padding: 8px 10px;
     font-size: 14px;
-    min-width: 40px;
-    min-height: 40px;
   }
 }
 
 @media (max-width: 480px) {
   .chat-header {
-    /* CORREÇÃO: Background ainda mais forte para telas pequenas */
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 12px 15px;
     min-height: 60px;
-    gap: 8px;
-  }
-
-  .chat-header-left {
-    gap: 8px;
-    /* CORREÇÃO: Reduz espaço mas mantém funcionalidade */
-    min-width: 0;
-    max-width: calc(100% - 100px); /* Deixa espaço para botão direito */
   }
 
   .chat-title {
     font-size: 1.2em;
-    /* ADICIONADO: Garante que se adapta ao espaço */
-    max-width: 150px;
   }
 
   .online-status {
     font-size: 0.75em;
-    /* ADICIONADO: Esconde em telas muito pequenas */
-    display: none;
   }
 
   .new-chat-header-btn {
     padding: 6px 10px;
     font-size: 11px;
-    /* ADICIONADO: Versão mais compacta */
-    min-width: 80px;
   }
 
   .sidebar-toggle-btn {
     padding: 6px 8px;
     font-size: 12px;
-    min-width: 36px;
-    min-height: 36px;
   }
 }
 
 /* ==========================================
-   TELAS MUITO PEQUENAS (< 320px)
-   ========================================== */
-
-@media (max-width: 320px) {
-  .chat-header {
-    padding: 10px 12px;
-    min-height: 56px;
-  }
-
-  .chat-title {
-    font-size: 1.1em;
-    max-width: 120px;
-  }
-
-  .new-chat-header-btn {
-    padding: 5px 8px;
-    font-size: 10px;
-    min-width: 70px;
-  }
-
-  .sidebar-toggle-btn {
-    padding: 5px 6px;
-    font-size: 11px;
-    min-width: 32px;
-    min-height: 32px;
-  }
-}
-
-/* ==========================================
-   IMPRESSÃO - CHAT HEADER
+   IMPRESSÃO - CHAT HEADER (SEM WARNINGS)
    ========================================== */
 
 @media print {
   .chat-header {
-    background: #4facfe !important;
+    background: #4facfe;
     -webkit-print-color-adjust: exact;
-    color-adjust: exact;
+    print-color-adjust: exact; /* Versão atualizada */
   }
 
   .sidebar-toggle-btn,
   .new-chat-header-btn {
     display: none;
-  }
-}
-
-/* ==========================================
-   MODO ESCURO - CHAT HEADER
-   ========================================== */
-
-@media (prefers-color-scheme: dark) {
-  .chat-header {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  }
-}
-
-/* ==========================================
-   ACESSIBILIDADE - CHAT HEADER
-   ========================================== */
-
-/* Para usuários com pouco contraste */
-@media (prefers-contrast: high) {
-  .chat-header {
-    background: #333 !important;
-    border-bottom: 2px solid #fff;
-  }
-
-  .sidebar-toggle-btn,
-  .new-chat-header-btn {
-    background: #666 !important;
-    border: 1px solid #fff;
-  }
-}
-
-/* Para redução de movimento */
-@media (prefers-reduced-motion: reduce) {
-  .sidebar-toggle-btn,
-  .new-chat-header-btn {
-    transition: none;
-  }
-
-  .sidebar-toggle-btn:hover,
-  .new-chat-header-btn:hover {
-    transform: none;
-  }
-
-  .status-dot {
-    animation: none;
   }
 }
