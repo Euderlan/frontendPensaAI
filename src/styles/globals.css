@@ -125,6 +125,44 @@ body {
   .chat-container.expanded {
     margin-left: 0;
   }
+
+   .chat-container {
+    /*Padding bottom para o input fixo */
+    padding-bottom: 80px;
+  }
+
+  .messages-area {
+    /* Padding bottom para não ficar atrás do input */
+    padding-bottom: 20px;
+    margin-bottom: 0;
+  }
+
+  /* Remove o input-wrapper do fluxo normal */
+  .input-wrapper {
+    position: fixed !important;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+    html {
+    /*Altura fixa para evitar redimensionamento */
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
+
+  body {
+    /*Altura fixa */
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
+
+  #root {
+    /*Altura fixa */
+    height: 100vh;
+    height: -webkit-fill-available;
+  }
 }
 
 @media (max-width: 480px) {
@@ -143,6 +181,15 @@ body {
     /* CORREÇÃO: Remove qualquer espaçamento extra */
     margin: 0;
     padding: 0;
+  }
+
+    .chat-container {
+    /* CORREÇÃO: Padding menor para telas pequenas */
+    padding-bottom: 70px;
+  }
+
+  .messages-area {
+    padding-bottom: 15px;
   }
 }
 
@@ -324,3 +371,30 @@ body {
     box-shadow: none;
   }
 }
+
+/* ==========================================
+   CORREÇÃO PARA TECLADO iOS
+   ========================================== */
+
+/* Específico para iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 768px) {
+    .input-wrapper {
+      /* CORREÇÃO: Considera safe area do iOS */
+      padding-bottom: calc(15px + env(safe-area-inset-bottom));
+    }
+  }
+}
+
+/* ==========================================
+   CORREÇÃO PARA ANDROID
+   ========================================== */
+
+/* Específico para Android Chrome */
+@media (max-width: 768px) and (orientation: portrait) {
+  .input-wrapper {
+    /* CORREÇÃO: Garante visibilidade no Android */
+    min-height: 60px;
+  }
+}
+
